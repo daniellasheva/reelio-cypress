@@ -1,0 +1,35 @@
+{
+	"id": 59112,
+	"enterprise_details": null,
+	"thumbnail": "https://reelio-asset.s3.amazonaws.com/default_profile_image.png",
+	"roles": ["account manager"],
+	"annotations": {},
+	"class_name": "enterprise",
+	"created": "2016-04-30T03:59:17.650629Z",
+	"name": "reelio enterprise",
+	"slug": "reelio-enterprise",
+	"is_active": true,
+	"deleted": null,
+	"permissions": {
+		"can_access_shared_rosters": true,
+		"can_manage_creators": false,
+		"can_approve_campaigns": true,
+		"can_manage_permissions": false,
+		"can_view_all_greenlight": false,
+		"can_manage_multiple_brands": true,
+		"can_manage_invites": true,
+		"can_send_messages": false,
+		"can_manage_brands": true,
+		"can_manage_serviceproviders": false,
+		"can_view_messages": false,
+		"can_manage_brand_agents": true,
+		"can_manage_finance": false,
+		"can_see_campaign_agent_details": false
+	},
+	"enterprisedetails": {
+		"id": 1,
+		"created": "2016-04-30T03:59:17.655735Z",
+		"banner_image": "https://reelio-asset.s3.amazonaws.com/1462225533992_infomanagerreeliolabscom.jpg",
+		"description": null
+	}
+}
