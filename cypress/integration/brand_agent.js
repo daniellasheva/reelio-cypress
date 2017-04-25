@@ -3,76 +3,14 @@ Brand agent critical path
 */
 
 describe('Brand agent', function (){
-
+  var token
   beforeEach(function (){
-// stubbing these
-    cy
-      .request("POST", "https://staging.reelio.com/api/v3/auth/login/", {email: "reeliotestagent@gmail.com", password: "password"})
-      .then(function(response) {
-        var token = response.token
+// if you have a jwt, get it and save it
+    if (token) {
+      cy.window().then(function(win) {
+        win.localStorage.setItem('jwt', token)
       })
-
-    cy
-      .server()
-      .route("GET", "https://staging.reelio.com/api/v3/notifications/?limit=10", {})
-    cy
-      .server()
-      .route("GET", "https://staging.reelio.com/api/v3/campaigns/?&ordering=-latest_event_dtime&limit=10", {})
-    cy
-      .server()
-      .route({
-        method: "GET",
-        url: "https://staging.reelio.com/api/v3/brands/**",
-        response: "fixture:brands",
-        status: 200,
-        headers: {
-          "authorization": token
-        }
-      })
-    cy
-      .server()
-      .route({
-        method: "GET",
-        url: "https://staging.reelio.com/api/v3/enterprises/me/?limit=10",
-        response: "fixture:enterprises_me",
-        status: 200,
-        headers: {
-          "authorization": token
-        }
-      })
-    cy
-      .server()
-      .route({
-        method: "GET",
-        url: "https://staging.reelio.com/api/v3/resources/status/?limit=10",
-        response: "fixture:resources_status",
-        status: 200,
-        headers: {
-          "authorization": token
-        }
-      })
-    cy
-      .server()
-      .route({
-        method: "GET",
-        url: "https://staging.reelio.com/api/v3/annotations/?category=verticals&limit=10",
-        response: "fixture:category_verticals",
-        status: 200,
-        headers: {
-          "authorization": token
-        }
-      })
-    cy
-      .server()
-      .route({
-        method: "GET",
-        url: "https://staging.reelio.com/api/v3/annotations/?category=keywords&limit=10",
-        response: "fixture:category_keywords",
-        status: 200,
-        headers: {
-          "authorization": token
-        }
-      })
+    }
   })
 
   it('should login as brand agent', function(){
@@ -92,6 +30,11 @@ describe('Brand agent', function (){
       .click()
 
     cy.title().should('include', 'Campaigns')
+
+// get the jwt and save it
+    cy.window().then(function(win) {
+      token = win.localStorage.getItem('jwt')
+    })
   })
 
   it('should navigate to brands list', function(){
