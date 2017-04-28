@@ -8,7 +8,7 @@ describe('Reelio Staging', function(){
 		.should('contain', 'Reelio')
 	})
 
-	it.only('Should log in as AM: brittany@reeliolabs.com', function(){
+	it('Should log in as AM: brittany@reeliolabs.com', function(){
 		cy.visit('3.1-staging.reelio.com')
 		cy.get('#app')
 		.get('form').find('input').first()
@@ -28,15 +28,8 @@ describe('Reelio Staging', function(){
 
 	it('Should click Create New Campaign', function(){
 		cy.get('button').contains('New Campaign').click()
+		cy.wait(4000)
+		cy.find('input').first().click()
 	})
 
-
-	it('Should click Create New Campaign', function(){
-		cy.visit('3.1-staging.reelio.com/campaigns')
-		cy.server().route("GET", /campaigns/, "fixtures:campaigns.json")
-		cy.get('button').contains('New Campaign').click()
-		// cy.wait('/campaigns')
-		//cy.get('button').contains('New Campaign')
-		//.click()
-	})
 })
