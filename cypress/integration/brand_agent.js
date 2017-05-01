@@ -37,9 +37,8 @@ describe('Brand agent', function (){
     cy
       .get("button[type='submit']")
       .click()
-
     cy.title().should('include', 'Campaigns')
-
+    
 // get the jwt and save it
     cy.window().then(function(win) {
       token = win.localStorage.getItem('jwt')
@@ -49,7 +48,6 @@ describe('Brand agent', function (){
   it('should navigate to brands list', function(){
     cy
       .get("button").contains("Brands")
-      .as("Brands")
       .click()
 
     cy.title().should('include', 'Brands')
@@ -90,6 +88,8 @@ describe('Brand agent', function (){
       .find('input')
       .last()
       .type('https://www.youtube.com/channel/UC80plZ2umGMIvYiRHkzNDWQ')
+
+// this doesn't work
     cy
       .fixture("logo.png").as("logo")
       .get("input[type=file]").then(function($input){
