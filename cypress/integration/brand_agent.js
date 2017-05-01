@@ -11,6 +11,15 @@ describe('Brand agent', function (){
         win.localStorage.setItem('jwt', token)
       })
     }
+
+// stub segment requests
+    cy
+      .server()
+      .route('POST', 'https://api.segment.io/**', 'fixture:segment')
+// stub intercom requests
+    cy
+      .server()
+      .route('GET', '*//*.intercom.io/**', {})
   })
 
   it('should login as brand agent', function(){
@@ -63,6 +72,35 @@ describe('Brand agent', function (){
       .get("div[data-react-toolbox='check']")
       .first()
       .click()
-  })
+    cy
+      .get("input[direction='down']")
+      .click()
+      .get("li[class='theme__suggestion___shQpe']")
+      .first()
+      .click()
+    cy
+      .get("div").contains("Links")
+      .parent()
+      .find('input')
+      .first()
+      .type('http://www.example.com')
+    cy
+      .get("div").contains("Links")
+      .parent()
+      .find('input')
+      .last()
+      .type('https://www.youtube.com/channel/UC80plZ2umGMIvYiRHkzNDWQ')
+    cy
+      .fixture("logo.png").as("logo")
+      .get("input[type=file]").then(function($input){
 
+      // convert the logo base64 string to a blob
+      return Cypress.Blob.base64StringToBlob(this.logo, "image/png").then(function(blob){
+
+        // pass the blob to the fileupload jQuery plugin
+        // which initiates a programmatic upload
+        $input.fileupload("add", {files: blob})
+      })
+    })
+  })
 })
