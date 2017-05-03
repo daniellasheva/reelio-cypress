@@ -17,6 +17,8 @@ describe('Brand agent', function (){
       .server()
       .route('POST', 'https://api.segment.io/**', 'fixture:segment')
 // stub intercom requests
+// this doesn't work
+// see issue https://github.com/cypress-io/cypress/issues/442
     cy
       .server()
       .route('GET', '*//*.intercom.io/**', {})
@@ -38,7 +40,7 @@ describe('Brand agent', function (){
       .get("button[type='submit']")
       .click()
     cy.title().should('include', 'Campaigns')
-    
+
 // get the jwt and save it
     cy.window().then(function(win) {
       token = win.localStorage.getItem('jwt')
@@ -89,7 +91,6 @@ describe('Brand agent', function (){
       .last()
       .type('https://www.youtube.com/channel/UC80plZ2umGMIvYiRHkzNDWQ')
 
-// this doesn't work
     cy
       .fixture("logo.png").as("logo")
       .get("input[type=file]").then(function($input){
@@ -97,9 +98,11 @@ describe('Brand agent', function (){
       // convert the logo base64 string to a blob
       return Cypress.Blob.base64StringToBlob(this.logo, "image/png").then(function(blob){
 
-        // pass the blob to the fileupload jQuery plugin
-        // which initiates a programmatic upload
-        $input.fileupload("add", {files: blob})
+        var jsInput = $input[0]
+        jsInput.files[0] = blob
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent('change', true, true )
+        jsInput.dispatchEvent(evt)
       })
     })
   })
