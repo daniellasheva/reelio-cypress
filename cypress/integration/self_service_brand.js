@@ -34,14 +34,14 @@ describe('Searchligh Brand', function (){
     })
   })
 
-  it('should click New Campaign and select brand', function(){
+  it.skip('should click New Campaign and select brand', function(){
     cy
 	  .wait(8000)
       .get("button").contains("New Campaign").click()
 	  .get(".styles__listText___251Z7").click()
   })
 
-  it('should fill out campaign form', function(){
+  it.skip('should fill out campaign form', function(){
     cy
 	  //wait for campaign title to populate
 	  .wait(3000)
@@ -66,7 +66,7 @@ describe('Searchligh Brand', function (){
 	 cy
 	   .get("div").contains("Enter your budget").parent().find("input")
 	   .type(4300)
-	   .get("button").parent().contains("Publish").click({force:true})
+	   .get("button").contains("Publish").click({force:true})
    })
 
 
@@ -99,5 +99,17 @@ describe('Searchligh Brand', function (){
   //
   // })
 */
+
+  it('should select the newly created campaign', function(){
+	  cy.wait(4000)
+	  cy
+	    .get(".styles__passport___1jNqy").first().click()
+  })
+
+  it('should add a creator to the campaign', function(){
+	  cy
+       .get('.styles__actionButton___2enQf').contains("Find Creators").click()
+	   .get("input[type='text']").type("Reelio Test Creator")
+  })
 
 })
