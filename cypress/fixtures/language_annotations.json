@@ -1,0 +1,22 @@
+{"annotations":
+{
+	"id":99317,
+	"created":"2017-04-28T16:06:35.425183Z",
+	"perms":"public",
+	"context":
+		{
+		"id":167073,
+		"class_name":"account",
+		"created":"2017-04-28T16:03:57.789806Z",
+		"name":"Cassini",
+		"slug":"cassini",
+		"is_active":true,
+		"deleted":null,
+		"permissions":67
+		},
+			"annotation":
+				{
+				"category":"language",
+				"content":"Spanish"}
+				},
+}
