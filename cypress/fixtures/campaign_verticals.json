@@ -1,0 +1,30 @@
+{
+	{"id": 215, "category": "verticals", "content": "Beauty"},
+
+	{"id": 216, "category": "verticals", "content": "Comedy"},
+
+	{"id": 217, "category": "verticals", "content": "Education"},
+
+	{"id": 218, "category": "verticals", "content": "Family"},
+
+	{"id": 219, "category": "verticals", "content": "Fashion"},
+
+	{"id": 220, "category": "verticals", "content": "Fitness/Health"},
+
+	{"id": 221, "category": "verticals", "content": "Food"},
+
+	{"id": 222, "category": "verticals", "content": "Game Show"},
+
+	{"id": 223, "category": "verticals", "content": "How-To/DIY"},
+
+	{"id": 224, "category": "verticals", "content": "Lifestyle"},
+
+	{"id": 225, "category": "verticals", "content": "Movies"},
+
+	{"id": 226, "category": "verticals", "content": "Music"},
+
+	{"id": 227, "category": "verticals", "content": "News"},
+
+	{"id": 228, "category": "verticals", "content": "Outdoors"}
+
+}

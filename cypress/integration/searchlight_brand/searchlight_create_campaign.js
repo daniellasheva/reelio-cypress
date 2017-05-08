@@ -1,8 +1,6 @@
 //TODO: figure out why campaign button doesn't show up the first time (/me doesn't work)
-//TODO: change the campaign name every time
 
-
-describe('Searchligh Brand', function (){
+describe('Searchlight Brand', function (){
   var token
   beforeEach(function (){
 // if you have a jwt, get it and save it
@@ -13,7 +11,7 @@ describe('Searchligh Brand', function (){
     }
   })
 
-  it('should login as self service brand', function(){
+  it('should login as searchlight brand', function(){
     cy.visit('http://localhost:8080')
     cy.title().should('include', 'Login')
     cy
@@ -28,15 +26,15 @@ describe('Searchligh Brand', function (){
       .get("button[type='submit']")
       .click()
 
-    cy.title().should('include', 'Campaigns')
+	cy.title().should('include', 'Campaigns')
     cy.window().then(function(win) {
       token = win.localStorage.getItem('jwt')
-    })
+	})
   })
 
   it.skip('should click New Campaign and select brand', function(){
     cy
-	  .wait(8000)
+	  .wait(3000)
       .get("button").contains("New Campaign").click()
 	  .get(".styles__listText___251Z7").click()
   })
@@ -45,14 +43,25 @@ describe('Searchligh Brand', function (){
     cy
 	  //wait for campaign title to populate
 	  .wait(3000)
+
+	  cy
+  	  .server()
+  	  .route({
+  		  method: "GET",
+  		  url: '/category=verticals&limit=500/',
+  		  response: [
+			  "fixture: campaign_verticals"
+		  ]
+  	  })
+
 	cy
-	//Click on Campaign title
+	  //Click on Campaign title
 	  .get('.theme__inputElement___27dyY').first().click()
 	  .type("{selectall}{backspace}")
 	  .type("new campaign")
 	  .get("div").contains("Most Important Campaign Goal").parent().find("input").click()
 	cy
-	//Select Verticals
+	  //Select Verticals
 	  .get("li").contains("Views").click().click()
 	  .get("div").contains("Auto/Vehicle").parent().find("label").click()
 	  .get("div").contains("Education").parent().find("label").click()
@@ -101,15 +110,15 @@ describe('Searchligh Brand', function (){
 */
 
   it('should select the newly created campaign', function(){
-	  cy.wait(4000)
-	  cy
-	    .get(".styles__passport___1jNqy").first().click()
+    cy.visit('http://localhost:8080')
+    cy.wait(4000)
+	cy.get(".styles__passport___1jNqy").first().click()
   })
 
   it('should add a creator to the campaign', function(){
-	  cy
-       .get('.styles__actionButton___2enQf').contains("Find Creators").click()
-	   .get("input[type='text']").type("Reelio Test Creator")
-  })
-
+	cy
+	 .get('.styles__actionButton___2enQf').contains("Find Creators").click()
+	 .get("input[type='text']").type("Reelio Test Creator{enter}")
+	 .get('section').get(".styles__detailedListItem___15mKA").first().find('button').click()
+	})
 })
