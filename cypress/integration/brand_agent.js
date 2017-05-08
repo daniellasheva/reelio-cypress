@@ -145,14 +145,18 @@ describe('Brand agent', function (){
     cy
       .contains("Campaign Name")
       .parent()
+      .find("input")
+      .clear()
       .type("Test Campaign")
     cy
       .contains("Most Important Campaign Goal")
       .parent()
       .click()
-      .get("li")
+      .get("ul.theme__values___1jS4g.styles__values___3yL4M")
+      .find("li")
       .first()
-      .click()
+      .click().click()
+      .select
     cy
       .get("div[data-react-toolbox='check']")
       .first()
